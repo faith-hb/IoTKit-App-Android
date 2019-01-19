@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'project-report'
 apply plugin: 'kotlin-android'
 //apply plugin: 'io.objectbox'
-apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox.android.transform'
 apply plugin: 'kotlin-android-extensions'
 
@@ -33,6 +33,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+//        incremental false
     }
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -252,7 +253,9 @@ android {
         }
     }
 
-
+    kapt {
+        generateStubs = true
+    }
 }
 
 
@@ -262,6 +265,10 @@ repositories {
     }
     mavenCentral()
     maven { url "http://objectbox.net/beta-repo/" }
+}
+
+greendao {
+    targetGenDir 'src/main/java'
 }
 
 greendao {
@@ -346,7 +353,7 @@ dependencies {
     compile 'com.danikula:videocache:2.6.4'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'org.greenrobot:greendao:3.2.2'
     compile 'com.google.dagger:dagger:2.10'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
@@ -356,6 +363,7 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.1'
     compile 'com.google.android.gms:play-services-gcm:10.2.1'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.2@aar'
